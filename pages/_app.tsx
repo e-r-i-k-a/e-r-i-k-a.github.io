@@ -1,10 +1,15 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { SWRConfig } from 'swr'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <SWRConfig 
+    value={{
+      fetcher: (url: string) => fetch(url).then(res => res.json())
+    }}
+  >
       <Head>
         <title>hi</title>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
@@ -35,7 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel='manifest' href='/site.webmanifest'></link>
       </Head>
       <Component {...pageProps} />
-    </>
+    </SWRConfig>
   );
 }
 
