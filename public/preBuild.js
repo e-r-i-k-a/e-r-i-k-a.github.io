@@ -7,7 +7,9 @@ const dirPath = path.join(
 );
 
 async function getImages() {
-  fs.unlinkSync(path.join(dirPath, 'data.json'));
+  fs.unlink(path.join(dirPath, 'data.json'), function cb(err, __) {
+    if (err) { } // do nothing
+  });
   const images = [];
   fs.readdirSync(dirPath).forEach(file => {
     const { height, width } = sizeOf(path.join(dirPath, file));
