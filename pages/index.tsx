@@ -6,7 +6,7 @@ const Home: NextPage = () => {
   const day: string = new Date()
     .toLocaleDateString('en-US', { weekday: 'long' })
     .toLowerCase();
-  const { src, width, height } = getImage();
+  const image = getImage();
 
   return (
     <div className={styles.container}>
@@ -16,12 +16,12 @@ const Home: NextPage = () => {
           <picture>
         {
             // eslint-disable-next-line @next/next/no-img-element
-            src && <img
+            image && <img
               className={styles.card}
-              src={src}
+              src={image.src}
               alt='headpat'
-              width={width}
-              height={height}
+              width={image.width}
+              height={image.height}
           />
             }
             </picture>
