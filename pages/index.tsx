@@ -14,15 +14,19 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
+        <div className={styles.grid}>
         <p className={styles.title}>happy {day}</p>
         {
-          src && <Image
-          src={src}
-          alt='headpat'
-          width={width}
-          height={height}
+            // eslint-disable-next-line @next/next/no-img-element
+            src && <img
+              className={styles.card}
+              src={src}
+              alt='headpat'
+              width={width}
+              height={height}
           />
-        }
+          }
+          </div>
       </main>
     </div> 
   );
