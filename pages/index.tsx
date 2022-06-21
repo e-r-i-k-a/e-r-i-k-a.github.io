@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import Image from 'next/image';
 import styles from '../styles/home.module.css';
 import { Images } from '../types';
 import { getImage } from '../util/helpers';
@@ -15,7 +14,8 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <div className={styles.grid}>
-        <p className={styles.title}>happy {day}</p>
+          <p className={styles.title}>happy {day}</p>
+          <picture>
         {
             // eslint-disable-next-line @next/next/no-img-element
             src && <img
@@ -25,7 +25,8 @@ const Home: NextPage = () => {
               width={width}
               height={height}
           />
-          }
+            }
+            </picture>
           </div>
       </main>
     </div> 
