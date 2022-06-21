@@ -1,14 +1,12 @@
 import type { NextPage } from 'next';
 import styles from '../styles/home.module.css';
-import { Images } from '../types';
 import { getImage } from '../util/helpers';
-const images: Images = require('../public/images/data.json');
 
 const Home: NextPage = () => {
   const day: string = new Date()
     .toLocaleDateString('en-US', { weekday: 'long' })
     .toLowerCase();
-  const { src, width, height } = getImage(images);
+  const { src, width, height } = getImage();
 
   return (
     <div className={styles.container}>
