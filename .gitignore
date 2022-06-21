@@ -25,5 +25,3 @@ npm-debug.log*
 
 # typescript
 *.tsbuildinfo
-
-/public/images/data.json
