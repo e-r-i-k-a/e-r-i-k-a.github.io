@@ -1,16 +1,14 @@
-import type { NextPage } from 'next';
-import {useEffect, useState} from 'react';
+import type { GetStaticProps } from 'next';
 import styles from '../styles/home.module.css';
 import { getImage } from '../util/helpers';
-import { Image } from '../types';
-import data from '../public/images/data.json';
+import { Image, Images } from '../types';
 
-const Home: NextPage = () => {
+const Home: React.FunctionComponent<HomeProps> = ({ json }) => {
   const day: string = new Date()
     .toLocaleDateString('en-US', { weekday: 'long' })
     .toLowerCase();
-  const [image, setImage] = useState({} as Image);
-  useEffect(() => setImage(getImage(data)), [])
+  const images: Images = JSON.parse(json);
+  const image: Image = getImage(images);
 
   return (
     <div className={styles.container}>
@@ -35,3 +33,14 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+type HomeProps = {
+  json: string
+}
+
+export const getStaticProps: GetStaticProps = async() => {
+  const data = await import('../public/images/data.json');
+  return {
+    props: { json: JSON.stringify(data)},
+  }
+}
