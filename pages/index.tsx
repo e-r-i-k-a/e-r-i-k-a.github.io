@@ -1,20 +1,26 @@
+import { useEffect, useState } from "react";
 import type { GetStaticProps } from 'next';
 import styles from '../styles/home.module.css';
 import { getImage } from '../util/helpers';
 import { Image, Images } from '../types';
 
 const Home: React.FunctionComponent<HomeProps> = ({ json }) => {
-  const day: string = new Date()
-    .toLocaleDateString('en-US', { weekday: 'long' })
-    .toLowerCase();
-  const images: Images = JSON.parse(json);
-  const image: Image = getImage(images);
+  const [day, setDay] = useState('');
+  const [image, setImage] = useState<Image | null>(null);
+
+  useEffect(() => {
+    setDay(() => new Date()
+      .toLocaleDateString('en-US', { weekday: 'long' })
+      .toLowerCase());
+    const images: Images = JSON.parse(json);
+    setImage(() => getImage(images));
+  }, [json]);
 
   return (
     <div className={styles.container}>
       <main className={styles.main}>
         <div className={styles.grid}>
-          {image.src &&
+          {image?.src && day &&
             <>
               <p className={styles.title}>happy {day}</p>
               <img
@@ -26,9 +32,9 @@ const Home: React.FunctionComponent<HomeProps> = ({ json }) => {
               />
             </>
           }
-          </div>
+        </div>
       </main>
-    </div> 
+    </div>
   );
 };
 
@@ -38,9 +44,9 @@ type HomeProps = {
   json: string
 }
 
-export const getStaticProps: GetStaticProps = async() => {
+export const getStaticProps: GetStaticProps = async () => {
   const data = await import('../public/images/data.json');
   return {
-    props: { json: JSON.stringify(data)},
+    props: { json: JSON.stringify(data) },
   }
 }
