@@ -12,7 +12,7 @@ async function getImages() {
   });
   const images = [];
   fs.readdirSync(dirPath).forEach(file => {
-    if (file.endsWith('.json')) return;
+    if (file.endsWith('.json')) return; // ignore data.json
     const { height, width } = sizeOf(path.join(dirPath, file));
     images.push({
       src: `/images/${file}`,
