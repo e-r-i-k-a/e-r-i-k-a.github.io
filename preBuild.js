@@ -16,8 +16,8 @@ async function getImages() {
     const { height, width } = sizeOf(path.join(dirPath, file));
     images.push({
       src: `/images/${file}`,
-      width: Number(width),
       height: Number(height),
+      width: Number(width),
     });
   });
   fs.writeFileSync(path.join(dirPath, 'data.json'), JSON.stringify(images));
